@@ -24,15 +24,19 @@ export const Navbar = () => {
         </span>
       </div>
       <nav className="flex gap-5">
-        {NAV_ITEMS.map(({ title, url }) => (
-          <Link
-            key={title}
-            className="text-white font-medium leading-4"
-            href={url}
-          >
-            {title}
-          </Link>
-        ))}
+        {NAV_ITEMS.map(({ title, url }) => {
+          const isActiveItem = isActive(url);
+          return (
+            <Link
+              key={title}
+              className={`relative font-medium leading-4 transition-colors duration-400 ${isActiveItem ? "text-active" : "text-white"} hover:text-active group`}
+              href={url}
+            >
+              {title}
+              <span className="absolute left-1/2 -translate-x-1/2 -bottom-2  w-0 h-[1px] bg-active transition-all duration-400 group-hover:w-[50%]" />
+            </Link>
+          );
+        })}
       </nav>
     </div>
   );
